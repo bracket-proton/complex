@@ -1,0 +1,104 @@
+{
+  "meta": {
+    "theme": "complex_systems",
+    "version": "1.0",
+    "description": "複雑系テーマのカードデータ。各フィールドの意味:\n  id: 一意識別子\n  name: カード表示名\n  type: perturbation(摂動) | structural(構造) | catalyst(触媒)\n  cost: エネルギーコスト\n  description: カード効果の説明文\n  value: 効果の基本数値\n  color: カードアート部分の色 [r, g, b] (0.0-1.0)\n  shape: 幾何学スプライト形状 (circle, triangle, hexagon, spiral, fractal, wave, attractor)\n  animation: アニメーション効果 (pulse, rotate, expand, oscillate, none)\n  multi_hit: 連続発動回数 (省略可)\n  self_entropy: 自己エントロピー増大量 (省略可: 使用時にプレイヤーにエントロピー発生)"
+  },
+  "cards": [
+    {
+      "id": "perturb_1",
+      "name": "エントロピー注入",
+      "type": "perturbation",
+      "cost": 1,
+      "description": "対象に6エントロピーを注入する",
+      "value": 6,
+      "color": [0.9, 0.3, 0.3],
+      "shape": "spiral",
+      "animation": "rotate"
+    },
+    {
+      "id": "perturb_2",
+      "name": "共鳴増幅",
+      "type": "perturbation",
+      "cost": 1,
+      "description": "対象に4エントロピーを2回注入する",
+      "value": 4,
+      "multi_hit": 2,
+      "color": [0.9, 0.4, 0.2],
+      "shape": "wave",
+      "animation": "oscillate"
+    },
+    {
+      "id": "structural_1",
+      "name": "自己組織化",
+      "type": "structural",
+      "cost": 1,
+      "description": "構造度を5回復する",
+      "value": 5,
+      "color": [0.3, 0.6, 0.9],
+      "shape": "hexagon",
+      "animation": "expand"
+    },
+    {
+      "id": "structural_2",
+      "name": "相転移",
+      "type": "structural",
+      "cost": 1,
+      "description": "構造度を8回復する",
+      "value": 8,
+      "color": [0.2, 0.7, 0.9],
+      "shape": "fractal",
+      "animation": "pulse"
+    },
+    {
+      "id": "catalyst_1",
+      "name": "分岐探索",
+      "type": "catalyst",
+      "cost": 1,
+      "description": "カードを1枚引く",
+      "value": 1,
+      "color": [0.4, 0.8, 0.4],
+      "shape": "triangle",
+      "animation": "rotate"
+    },
+    {
+      "id": "catalyst_2",
+      "name": "フィードバック",
+      "type": "catalyst",
+      "cost": 1,
+      "description": "次の摂動カードのエントロピー+3",
+      "value": 3,
+      "color": [0.8, 0.6, 0.2],
+      "shape": "circle",
+      "animation": "pulse"
+    },
+    {
+      "id": "perturb_3",
+      "name": "カオス増幅",
+      "type": "perturbation",
+      "cost": 1,
+      "description": "対象に10エントロピー(使用時、システムに3エントロピー蓄積)",
+      "value": 10,
+      "self_entropy": 3,
+      "color": [0.8, 0.2, 0.6],
+      "shape": "attractor",
+      "animation": "oscillate"
+    },
+    {
+      "id": "structural_3",
+      "name": "負のエントロピー",
+      "type": "structural",
+      "cost": 1,
+      "description": "構造度を4回復する",
+      "value": 4,
+      "color": [0.9, 0.7, 0.8],
+      "shape": "hexagon",
+      "animation": "expand"
+    }
+  ],
+  "starter_deck": [
+    "perturb_1", "perturb_1", "perturb_1",
+    "structural_1", "structural_1", "structural_1",
+    "catalyst_1"
+  ]
+}

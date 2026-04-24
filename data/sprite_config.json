@@ -1,0 +1,59 @@
+{
+  "meta": {
+    "description": "スプライト設定テンプレート。各形状の幾何学アニメーションパラメータを定義。\n  shape: 形状名\n  params: 描画パラメータ\n  animation_params: アニメーションパラメータ"
+  },
+  "shapes": {
+    "circle": {
+      "draw_func": "_draw_circle",
+      "params": {"radius": 20, "segments": 32},
+      "animation_params": {"pulse_scale": [0.9, 1.1], "pulse_speed": 2.0}
+    },
+    "triangle": {
+      "draw_func": "_draw_polygon",
+      "params": {"sides": 3, "radius": 22},
+      "animation_params": {"rotate_speed": 1.5}
+    },
+    "hexagon": {
+      "draw_func": "_draw_polygon",
+      "params": {"sides": 6, "radius": 22},
+      "animation_params": {"expand_scale": [0.8, 1.0], "expand_speed": 1.0}
+    },
+    "spiral": {
+      "draw_func": "_draw_spiral",
+      "params": {"turns": 3, "max_radius": 22},
+      "animation_params": {"rotate_speed": 2.0}
+    },
+    "wave": {
+      "draw_func": "_draw_wave",
+      "params": {"amplitude": 12, "wavelength": 30, "length": 60},
+      "animation_params": {"oscillate_speed": 3.0, "oscillate_amount": 5}
+    },
+    "fractal": {
+      "draw_func": "_draw_fractal_tree",
+      "params": {"depth": 4, "length": 20, "angle": 0.4},
+      "animation_params": {"pulse_scale": [0.95, 1.05], "pulse_speed": 1.0}
+    },
+    "attractor": {
+      "draw_func": "_draw_attractor",
+      "params": {"points": 200, "scale": 20},
+      "animation_params": {"oscillate_speed": 0.5, "oscillate_amount": 3}
+    }
+  },
+  "enemy_sprites": {
+    "chaos_node": {
+      "shape": "attractor",
+      "color": [0.6, 0.1, 0.3],
+      "description": "カオス的摂動源"
+    },
+    "entropy_field": {
+      "shape": "spiral",
+      "color": [0.8, 0.2, 0.2],
+      "description": "エントロピー場"
+    },
+    "bifurcation_point": {
+      "shape": "wave",
+      "color": [0.7, 0.3, 0.1],
+      "description": "分岐点"
+    }
+  }
+}

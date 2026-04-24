@@ -1,0 +1,72 @@
+{
+  "meta": {
+    "description": "ゲーム設定テンプレート。テーマに応じた用語と数値バランスを定義。\\nこのファイルを変更するだけでゲーム全体のテーマを切り替え可能。"
+  },
+  "debug_mode": false,
+  "terminology": {
+    "player_hp": "構造度",
+    "player_hp_max": "最大構造度",
+    "shield": "負エントロピー",
+    "enemy_damage_bar": "摂動蓄積",
+    "enemy_damage_max": "相転移閾値",
+    "energy": "エネルギー",
+    "draw_pile": "可能性空間",
+    "discard_pile": "履歴",
+    "hand": "作用点",
+    "end_turn": "時間経過",
+    "victory": "安定化達成",
+    "defeat": "熱的平衡"
+  },
+  "card_types": {
+    "perturbation": {
+      "label": "摂動",
+      "description": "対象の構造にエントロピーを注入する作用"
+    },
+    "structural": {
+      "label": "構造",
+      "description": "システムの秩序度を回復・維持する作用"
+    },
+    "catalyst": {
+      "label": "触媒",
+      "description": "他の作用を増幅・変換する仲介的効果"
+    }
+  },
+  "floors": [
+    {
+      "name": "平衡状態",
+      "enemy_name": "平衡維持機構",
+      "enemy_color": "#F0F8FF",
+      "stability_threshold": 15,
+      "enemy_intents": [
+        {"text": "微小摂動 (4エントロピー)", "type": "entropy", "value": 4},
+        {"text": "局所不安定 (6エントロピー)", "type": "entropy", "value": 6},
+        {"text": "自己安定化", "type": "stabilize", "value": 0},
+        {"text": "中間摂動 (5エントロピー)", "type": "entropy", "value": 5}
+      ]
+    },
+    {
+      "name": "非平衡ダイナミクス",
+      "enemy_name": "カオスアトラクター",
+      "enemy_color": "#8B008B",
+      "stability_threshold": 20,
+      "enemy_intents": [
+        {"text": "大規模摂動 (6エントロピー)", "type": "entropy", "value": 6},
+        {"text": "連鎖不安定 (4エントロピー×2)", "type": "entropy", "value": 4, "multi": 2},
+        {"text": "吸引子転移", "type": "stabilize", "value": 0},
+        {"text": "カオス的変動 (7エントロピー)", "type": "entropy", "value": 7}
+      ]
+    }
+  ],
+  "player_defaults": {
+    "max_structure": 30,
+    "start_energy": 1,
+    "cards_per_turn": 3
+  },
+  "reward_count": 3,
+  "scene_flow": {
+    "main_menu": "res://scenes/main_menu.tscn",
+    "stage_select": "res://scenes/stage_select.tscn",
+    "battle": "res://scenes/battle.tscn",
+    "reward": "res://scenes/reward.tscn"
+  }
+}

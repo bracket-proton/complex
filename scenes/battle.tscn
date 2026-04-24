@@ -1,0 +1,313 @@
+[gd_scene format=3 uid="uid://fk8spso02wqx"]
+
+[ext_resource type="Script" uid="uid://tnquknr8apgt" path="res://scripts/battle/battle_manager.gd" id="1_bat"]
+[ext_resource type="Script" uid="uid://h118uybgaby5" path="res://scripts/ui/geometric_sprite.gd" id="2_sprite"]
+
+[node name="Battle" type="Control" unique_id=326625467]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bat")
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
+
+[node name="BgRect" type="ColorRect" parent="." unique_id=1593709264]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08, 0.06, 0.1, 1)
+
+[node name="BgPattern" type="Control" parent="." unique_id=999000111]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="EnemyArea" type="Control" parent="." unique_id=1057506449]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 480.0
+grow_horizontal = 2
+
+[node name="EnemyNameLabel" type="Label" parent="EnemyArea" unique_id=1965257568]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.05
+anchor_right = 0.8
+anchor_bottom = 0.05
+offset_top = 375.0
+offset_bottom = 398.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "摂動源"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnemySprite" type="Control" parent="EnemyArea" unique_id=1403824999]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchor_left = 0.25
+anchor_top = 0.15
+anchor_right = 0.75
+anchor_bottom = 0.75
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_sprite")
+
+[node name="IntentBg" type="ColorRect" parent="EnemyArea" unique_id=1026375528]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.05
+anchor_right = 0.8
+anchor_bottom = 0.05
+offset_top = 28.0
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.15, 0.08, 0.12, 0.9)
+
+[node name="IntentLabel" type="Label" parent="EnemyArea" unique_id=829824018]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.05
+anchor_right = 0.8
+anchor_bottom = 0.05
+offset_top = 27.0
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "摂動源の活動"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EntropyBarOuter" type="ColorRect" parent="EnemyArea" unique_id=1997498999]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.15
+anchor_top = 0.9
+anchor_right = 0.85
+anchor_bottom = 0.9
+offset_bottom = 20.0
+grow_horizontal = 2
+color = Color(0.15, 0.15, 0.2, 0.85)
+
+[node name="EntropyBarInner" type="ColorRect" parent="EnemyArea" unique_id=532681053]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.15
+anchor_top = 0.9
+anchor_right = 0.15
+anchor_bottom = 0.9
+offset_bottom = 20.0
+grow_horizontal = 2
+color = Color(0.9, 0.3, 0.5, 1)
+
+[node name="EntropyLabel" type="Label" parent="EnemyArea" unique_id=1080783765]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.15
+anchor_top = 0.9
+anchor_right = 0.85
+anchor_bottom = 0.9
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "摂動蓄積: 0 / 35"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerStatus" type="Control" parent="." unique_id=238499222]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = 62.0
+offset_right = -1.0
+offset_bottom = 146.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StatusBg" type="ColorRect" parent="PlayerStatus" unique_id=1911564355]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="StructureBarOuter" type="ColorRect" parent="PlayerStatus" unique_id=1383053197]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.25
+anchor_right = 0.98
+anchor_bottom = 0.25
+offset_bottom = 12.0
+grow_horizontal = 2
+color = Color(0.15, 0.15, 0.2, 0.85)
+
+[node name="StructureBarInner" type="ColorRect" parent="PlayerStatus" unique_id=672930642]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.25
+anchor_right = 0.02
+anchor_bottom = 0.25
+offset_bottom = 12.0
+grow_horizontal = 2
+color = Color(0.2, 0.8, 0.4, 1)
+
+[node name="StructureLabel" type="Label" parent="PlayerStatus" unique_id=1679356119]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.05
+anchor_right = 0.02
+anchor_bottom = 0.05
+offset_left = 5.0
+offset_top = 2.000012
+offset_right = 130.0
+offset_bottom = 26.000011
+text = "構造度: 30 / 30"
+
+[node name="EntropyShieldLabel" type="Label" parent="PlayerStatus" unique_id=1792042034]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.35
+anchor_right = 0.02
+anchor_bottom = 0.35
+offset_left = 5.0
+offset_top = 2.0
+offset_right = 130.0
+offset_bottom = 26.0
+text = "負エントロピー: 0"
+
+[node name="EnergyLabel" type="Label" parent="PlayerStatus" unique_id=702577277]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.65
+anchor_right = 0.02
+anchor_bottom = 0.65
+offset_left = 5.0
+offset_top = 2.0
+offset_right = 130.0
+offset_bottom = 26.0
+text = "エネルギー: 1/1"
+
+[node name="HistoryLabel" type="Label" parent="PlayerStatus" unique_id=425608232]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.05
+anchor_right = 0.5
+anchor_bottom = 0.05
+offset_left = 5.0
+offset_top = 2.0
+offset_right = 280.0
+offset_bottom = 26.0
+text = "可能性空間: 0 | 履歴: 0"
+
+[node name="TurnLabel" type="Label" parent="PlayerStatus" unique_id=1500621804]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.35
+anchor_right = 0.5
+anchor_bottom = 0.35
+offset_left = 5.0
+offset_top = 2.0
+offset_right = 280.0
+offset_bottom = 26.0
+text = "時間 1"
+
+[node name="HandArea" type="HBoxContainer" parent="." unique_id=991883106]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 641.0
+offset_bottom = 822.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="DeckBtn" type="Button" parent="." unique_id=1174603035]
+custom_minimum_size = Vector2(76, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -76.0
+offset_bottom = 76.0
+grow_horizontal = 0
+text = "デッキ"
+
+[node name="DrawBtn" type="Button" parent="." unique_id=984507569]
+custom_minimum_size = Vector2(76, 0)
+layout_mode = 1
+anchors_preset = -1
+offset_top = 794.0
+offset_right = 76.0
+offset_bottom = 870.0
+text = "山札"
+
+[node name="DiscardBtn" type="Button" parent="." unique_id=512895817]
+custom_minimum_size = Vector2(76, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -76.0
+offset_top = 794.0
+offset_bottom = 870.0
+grow_horizontal = 0
+text = "履歴"
+
+[node name="ControlBar" type="Control" parent="." unique_id=639816951]
+layout_mode = 1
+anchor_top = 0.87000006
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 34.799927
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="EndTurnButton" type="Button" parent="ControlBar" unique_id=164513082]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "時間経過"
+
+[node name="UICanvas" type="CanvasLayer" parent="."]
+
+[node name="SettingsButton" type="Button" parent="UICanvas"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 56.0
+offset_bottom = 40.0
+text = "⚙"

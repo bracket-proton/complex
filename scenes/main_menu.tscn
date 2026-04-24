@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://ceie4cax5048e"]
+
+[ext_resource type="Script" uid="uid://bovjfihaowm4c" path="res://scripts/main.gd" id="1_main"]
+
+[node name="MainMenu" type="Control" unique_id=1622623471]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_main")
+
+[node name="BgRect" type="ColorRect" parent="." unique_id=593355815]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.04, 0.03, 0.06, 1)
+
+[node name="TitleLabel" type="Label" parent="." unique_id=1132849423]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.33
+anchor_right = 0.5
+anchor_bottom = 0.33
+grow_horizontal = 2
+theme_override_constants/outline_size = 11
+theme_override_font_sizes/font_size = 64
+text = "complex"
+horizontal_alignment = 1
+
+[node name="SubLabel" type="Label" parent="." unique_id=1384347426]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.42
+anchor_right = 0.5
+anchor_bottom = 0.42
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 14
+text = "複雑系デッキビルダー"
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="." unique_id=2131926230]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.69600004
+anchor_right = 0.5
+anchor_bottom = 0.69600004
+offset_left = -54.0
+offset_top = -0.16003418
+offset_right = 54.0
+offset_bottom = 108.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "始める"
+
+[node name="UICanvas" type="CanvasLayer" parent="." unique_id=1601820367]
+
+[node name="SettingsButton" type="Button" parent="UICanvas" unique_id=11204337]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 56.0
+offset_bottom = 40.0
+text = "⚙"
