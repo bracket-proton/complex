@@ -21,4 +21,4 @@ func _update_stats() -> void:
 
 func _on_title_pressed() -> void:
 	GameState.reset_run()
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	get_tree().change_scene_to_file(GameState.get_scene_path("main_menu", "res://scenes/main_menu.tscn"))

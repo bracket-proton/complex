@@ -41,6 +41,8 @@ var discard_pile: Array[Dictionary] = []  # 履歴
 var next_perturb_bonus: int = 0
 var enemy_intent: Dictionary = {}
 var floor_config: Dictionary = {}
+var enemy_intent_index: int = 0
+var enemy_intent_mode: String = "random"
 
 func _ready() -> void:
 	end_turn_button.pressed.connect(_on_end_turn)
@@ -61,6 +63,13 @@ func _start_battle() -> void:
 	# フロア設定の読み込み
 	floor_config = GameState.get_floor_config(GameState.current_floor - 1)
 	stability_threshold = floor_config.get("stability_threshold", 35)
+	print("Debug: floor_config keys: ", floor_config.keys())
+	# 敵意図選択モードの取得（randomまたはsequential）
+	enemy_intent_mode = floor_config.get("enemy_intent_mode", "random")
+	# sequentialモードではインデックスをリセット
+	if enemy_intent_mode == "sequential":
+		enemy_intent_index = 0
+	print("Debug: Enemy intent mode = ", enemy_intent_mode)
 	
 	# 敵の名前を設定
 	var enemy_name = floor_config.get("enemy_name", "摂動源")
@@ -68,6 +77,13 @@ func _start_battle() -> void:
 	
 	# 敵スプライトの設定
 	_configure_enemy_sprite()
+	
+	# プレイヤー初期値の読み込み
+	var defaults = GameState.get_player_defaults()
+	player_max_structure = defaults.get("max_structure", 30)
+	max_energy = defaults.get("start_energy", 1)
+	player_structure = player_max_structure
+	energy = max_energy
 	
 	# プレイヤーデッキを使用（空なら初期デッキ）
 	if GameState.player_deck.is_empty():
@@ -141,8 +157,12 @@ func _determine_enemy_intent() -> void:
 		# フォールバック
 		enemy_intent = {"text": "微小摂動 (3エントロピー)", "type": "entropy", "value": 3}
 	else:
-		enemy_intent = intents[randi() % intents.size()]
-	intent_label.text = enemy_intent.get("text", "???")
+		if enemy_intent_mode == "random":
+			enemy_intent = intents[randi() % intents.size()]
+		elif enemy_intent_mode == "sequential":
+			enemy_intent = intents[enemy_intent_index]
+			enemy_intent_index = (enemy_intent_index + 1) % intents.size()
+		intent_label.text = enemy_intent.get("text", "???")
 
 func _draw_cards(count: int) -> void:
 	for i in count:
@@ -349,9 +369,9 @@ func _on_victory() -> void:
 	
 	# 最後のバトルならクリアリザルトへ、 otherwise 報酬画面へ
 	if GameState.current_floor >= GameState.max_floor:
-		get_tree().change_scene_to_file("res://scenes/clear_result.tscn")
+		get_tree().change_scene_to_file(GameState.get_scene_path("clear_result", "res://scenes/clear_result.tscn"))
 	else:
-		get_tree().change_scene_to_file("res://scenes/reward.tscn")
+		get_tree().change_scene_to_file(GameState.get_scene_path("reward", "res://scenes/reward.tscn"))
 
 func _play_enemy_defeat_animation() -> void:
 	# 摂動源が相転移（発散）するアニメーション
@@ -383,7 +403,7 @@ func _on_defeat_continue() -> void:
 
 func _on_defeat_reset() -> void:
 	GameState.reset_run()
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	get_tree().change_scene_to_file(GameState.get_scene_path("main_menu", "res://scenes/main_menu.tscn"))
 
 # --- デッキ/山札/捨て札ビューポップアップ ---
 

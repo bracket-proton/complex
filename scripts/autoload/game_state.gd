@@ -25,7 +25,6 @@ func _ready() -> void:
 func _load_config() -> void:
 	if _loaded:
 		return
-	_loaded = true
 	
 	var file := FileAccess.open(CONFIG_PATH, FileAccess.READ)
 	if file == null:
@@ -36,10 +35,14 @@ func _load_config() -> void:
 	var err := json.parse(file.get_as_text())
 	file.close()
 	
-	if err == OK:
-		_config = json.data
-		if _config.has("floors"):
-			max_floor = _config["floors"].size()
+	if err != OK:
+		push_error("GameState: JSON解析エラー - %s" % json.get_error_message())
+		return
+	
+	_config = json.data
+	_loaded = true
+	if _config.has("floors"):
+		max_floor = _config["floors"].size()
 
 func get_config() -> Dictionary:
 	_load_config()
@@ -64,6 +67,9 @@ func get_player_defaults() -> Dictionary:
 		"start_energy": 1,
 		"cards_per_turn": 3
 	})
+
+func get_scene_path(key: String, fallback: String = "") -> String:
+	return get_config().get("scene_flow", {}).get(key, fallback)
 
 func is_debug_mode() -> bool:
 	return get_config().get("debug_mode", false)

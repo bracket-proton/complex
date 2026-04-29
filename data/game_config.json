@@ -38,11 +38,28 @@
       "enemy_color": "#F0F8FF",
       "stability_threshold": 15,
       "enemy_intents": [
-        {"text": "微小摂動 (4エントロピー)", "type": "entropy", "value": 4},
-        {"text": "局所不安定 (6エントロピー)", "type": "entropy", "value": 6},
-        {"text": "自己安定化", "type": "stabilize", "value": 0},
-        {"text": "中間摂動 (5エントロピー)", "type": "entropy", "value": 5}
-      ]
+        {
+          "text": "微小摂動 (4エントロピー)",
+          "type": "entropy",
+          "value": 4
+        },
+        {
+          "text": "局所不安定 (6エントロピー)",
+          "type": "entropy",
+          "value": 6
+        },
+        {
+          "text": "自己安定化",
+          "type": "stabilize",
+          "value": 0
+        },
+        {
+          "text": "中間摂動 (5エントロピー)",
+          "type": "entropy",
+          "value": 5
+        }
+      ],
+      "enemy_intent_mode": "sequential" 
     },
     {
       "name": "非平衡ダイナミクス",
@@ -50,11 +67,29 @@
       "enemy_color": "#8B008B",
       "stability_threshold": 20,
       "enemy_intents": [
-        {"text": "大規模摂動 (6エントロピー)", "type": "entropy", "value": 6},
-        {"text": "連鎖不安定 (4エントロピー×2)", "type": "entropy", "value": 4, "multi": 2},
-        {"text": "吸引子転移", "type": "stabilize", "value": 0},
-        {"text": "カオス的変動 (7エントロピー)", "type": "entropy", "value": 7}
-      ]
+        {
+          "text": "大規模摂動 (6エントロピー)",
+          "type": "entropy",
+          "value": 6
+        },
+        {
+          "text": "連鎖不安定 (4エントロピー×2)",
+          "type": "entropy",
+          "value": 4,
+          "multi": 2
+        },
+        {
+          "text": "吸引子転移",
+          "type": "stabilize",
+          "value": 0
+        },
+        {
+          "text": "カオス的変動 (7エントロピー)",
+          "type": "entropy",
+          "value": 7
+        }
+      ],
+      "enemy_intent_mode": "random"
     }
   ],
   "player_defaults": {
@@ -67,6 +102,7 @@
     "main_menu": "res://scenes/main_menu.tscn",
     "stage_select": "res://scenes/stage_select.tscn",
     "battle": "res://scenes/battle.tscn",
-    "reward": "res://scenes/reward.tscn"
+    "reward": "res://scenes/reward.tscn",
+    "clear_result": "res://scenes/clear_result.tscn"
   }
 }

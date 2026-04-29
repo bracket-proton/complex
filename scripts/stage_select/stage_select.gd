@@ -21,8 +21,8 @@ func _update_floor_display() -> void:
 	stage_name_label.text = "位相 %d - %s" % [GameState.current_floor, floor_name]
 
 func _on_start_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/battle.tscn")
+	get_tree().change_scene_to_file(GameState.get_scene_path("battle", "res://scenes/battle.tscn"))
 
 func _on_back_pressed() -> void:
 	GameState.reset_run()
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	get_tree().change_scene_to_file(GameState.get_scene_path("main_menu", "res://scenes/main_menu.tscn"))

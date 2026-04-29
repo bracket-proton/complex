@@ -48,6 +48,6 @@ func _on_next() -> void:
 	if not selected_card_data.is_empty():
 		GameState.player_deck.append(selected_card_data.duplicate())
 	if GameState.advance_floor():
-		get_tree().change_scene_to_file("res://scenes/battle.tscn")
+		get_tree().change_scene_to_file(GameState.get_scene_path("battle", "res://scenes/battle.tscn"))
 	else:
-		get_tree().change_scene_to_file("res://scenes/clear_result.tscn")
+		get_tree().change_scene_to_file(GameState.get_scene_path("clear_result", "res://scenes/clear_result.tscn"))
