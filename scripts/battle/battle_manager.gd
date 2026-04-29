@@ -61,7 +61,7 @@ func _start_battle() -> void:
 	GameState.total_battles += 1
 	
 	# フロア設定の読み込み
-	floor_config = GameState.get_floor_config(GameState.current_floor - 1)
+	floor_config = GameState.get_floor_config()
 	stability_threshold = floor_config.get("stability_threshold", 35)
 	print("Debug: floor_config keys: ", floor_config.keys())
 	# 敵意図選択モードの取得（randomまたはsequential）
@@ -102,13 +102,13 @@ func _start_battle() -> void:
 	_play_bgm_fade_in()
 
 func _play_bgm_fade_in() -> void:
-	# BGMをフェードイン再生
+	# BGMをフェードイン再生（50%音量）
 	bgm_player.stream = BGM_STREAM
 	bgm_player.volume_db = -80.0
 	bgm_player.play()
 	
 	var tween = create_tween()
-	tween.tween_property(bgm_player, "volume_db", 0.0, 1.0)
+	tween.tween_property(bgm_player, "volume_db", -6.0, 1.0)
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_QUAD)
 
@@ -122,13 +122,12 @@ func _stop_bgm_fade_out() -> void:
 
 func _configure_enemy_sprite() -> void:
 	if enemy_sprite and enemy_sprite.has_method("configure"):
-		# 摂動源のスプライト設定
 		var enemy_color_hex = floor_config.get("enemy_color", "#FFFFFF")
 		var enemy_color_rgb = _hex_to_rgb(enemy_color_hex)
 		var sprite_data = {
-			"shape": "attractor",
+			"shape": floor_config.get("enemy_sprite_shape", "attractor"),
 			"color": enemy_color_rgb,
-			"animation": "oscillate"
+			"animation": floor_config.get("enemy_sprite_animation", "oscillate")
 		}
 		enemy_sprite.configure(sprite_data)
 
@@ -341,7 +340,10 @@ func _execute_entropy_phase() -> void:
 					damage -= entropy_shield
 					entropy_shield = 0
 			player_structure -= damage
-	# "stabilize" type: 摂動源が自己安定化（何もしない）
+	elif intent_type == "reduce_entropy":
+		# 敵が蓄積エントロピーを減少させる
+		var reduce_val = enemy_intent.get("value", 0)
+		system_entropy = maxi(0, system_entropy - reduce_val)
 
 func _check_win_condition() -> void:
 	if system_entropy >= stability_threshold:
@@ -367,8 +369,10 @@ func _on_victory() -> void:
 	_play_enemy_defeat_animation()
 	await get_tree().create_timer(0.66).timeout
 	
-	# 最後のバトルならクリアリザルトへ、 otherwise 報酬画面へ
-	if GameState.current_floor >= GameState.max_floor:
+	# レジーム内の最後のフロアならクリアリザルトへ、otherwise 報酬画面へ
+	var max_floor_in_regime = GameState.get_max_floor_in_regime()
+	if GameState.current_floor + 1 >= max_floor_in_regime:
+		GameState.complete_current_regime()
 		get_tree().change_scene_to_file(GameState.get_scene_path("clear_result", "res://scenes/clear_result.tscn"))
 	else:
 		get_tree().change_scene_to_file(GameState.get_scene_path("reward", "res://scenes/reward.tscn"))

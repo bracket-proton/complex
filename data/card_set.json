@@ -97,8 +97,10 @@
     }
   ],
   "starter_deck": [
-    "perturb_1", "perturb_1", "perturb_1",
-    "structural_1", "structural_1", "structural_1",
-    "catalyst_1"
+    "perturb_1", "perturb_1",
+    "perturb_1",
+    "structural_1", "structural_1",
+    "structural_1",
+    "perturb_3"
   ]
 }

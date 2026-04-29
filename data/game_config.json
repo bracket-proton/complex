@@ -31,65 +31,183 @@
       "description": "他の作用を増幅・変換する仲介的効果"
     }
   },
-  "floors": [
+  "regimes": [
     {
-      "name": "平衡状態",
-      "enemy_name": "平衡維持機構",
-      "enemy_color": "#F0F8FF",
-      "stability_threshold": 15,
-      "enemy_intents": [
+      "name": "線形領域",
+      "description": "摂動が小さく、系は平衡近傍で線形応答を示す",
+      "floors": [
         {
-          "text": "微小摂動 (4エントロピー)",
-          "type": "entropy",
-          "value": 4
-        },
-        {
-          "text": "局所不安定 (6エントロピー)",
-          "type": "entropy",
-          "value": 6
-        },
-        {
-          "text": "自己安定化",
-          "type": "stabilize",
-          "value": 0
-        },
-        {
-          "text": "中間摂動 (5エントロピー)",
-          "type": "entropy",
-          "value": 5
+          "name": "平衡状態",
+          "enemy_name": "平衡維持機構",
+          "enemy_color": "#F0F8FF",
+          "enemy_sprite_shape": "hexagon",
+          "enemy_sprite_animation": "expand",
+          "stability_threshold": 15,
+          "enemy_intents": [
+            {
+              "text": "微小摂動 (4エントロピー)",
+              "type": "entropy",
+              "value": 4
+            },
+            {
+              "text": "局所不安定 (6エントロピー)",
+              "type": "entropy",
+              "value": 6
+            },
+            {
+              "text": "自己安定化",
+              "type": "stabilize",
+              "value": 0
+            },
+            {
+              "text": "中間摂動 (5エントロピー)",
+              "type": "entropy",
+              "value": 5
+            }
+          ],
+          "enemy_intent_mode": "sequential"
         }
-      ],
-      "enemy_intent_mode": "sequential" 
+      ]
     },
     {
-      "name": "非平衡ダイナミクス",
-      "enemy_name": "カオスアトラクター",
-      "enemy_color": "#8B008B",
-      "stability_threshold": 20,
-      "enemy_intents": [
+      "name": "非線形領域",
+      "description": "摂動が増大し、系は非線形応答と分岐を示す",
+      "floors": [
         {
-          "text": "大規模摂動 (6エントロピー)",
-          "type": "entropy",
-          "value": 6
+          "name": "非平衡ダイナミクス",
+          "enemy_name": "カオスアトラクター",
+          "enemy_color": "#8B008B",
+          "enemy_sprite_shape": "attractor",
+          "enemy_sprite_animation": "oscillate",
+          "stability_threshold": 20,
+          "enemy_intents": [
+            {
+              "text": "大規模摂動 (6エントロピー)",
+              "type": "entropy",
+              "value": 6
+            },
+            {
+              "text": "連鎖不安定 (4エントロピー×2)",
+              "type": "entropy",
+              "value": 4,
+              "multi": 2
+            },
+            {
+              "text": "吸引子転移",
+              "type": "stabilize",
+              "value": 0
+            },
+            {
+              "text": "カオス的変動 (7エントロピー)",
+              "type": "entropy",
+              "value": 7
+            }
+          ],
+          "enemy_intent_mode": "random"
         },
         {
-          "text": "連鎖不安定 (4エントロピー×2)",
-          "type": "entropy",
-          "value": 4,
-          "multi": 2
-        },
-        {
-          "text": "吸引子転移",
-          "type": "stabilize",
-          "value": 0
-        },
-        {
-          "text": "カオス的変動 (7エントロピー)",
-          "type": "entropy",
-          "value": 7
+          "name": "分岐点",
+          "enemy_name": "分岐生成子",
+          "enemy_color": "#FF6347",
+          "enemy_sprite_shape": "spiral",
+          "enemy_sprite_animation": "rotate",
+          "stability_threshold": 25,
+          "enemy_intents": [
+            {
+              "text": "構造浸食 (5エントロピー)",
+              "type": "entropy",
+              "value": 5
+            },
+            {
+              "text": "相転移誘発 (8エントロピー)",
+              "type": "entropy",
+              "value": 8
+            },
+            {
+              "text": "自己組織化",
+              "type": "stabilize",
+              "value": 0
+            },
+            {
+              "text": "臨界摂動 (6エントロピー×2)",
+              "type": "entropy",
+              "value": 6,
+              "multi": 2
+            }
+          ],
+          "enemy_intent_mode": "sequential"
         }
-      ],
-      "enemy_intent_mode": "random"
+      ]
+    },
+    {
+      "name": "創発領域",
+      "description": "マクロな秩序がミクロな相互作用から自発的に出現する",
+      "floors": [
+        {
+          "name": "散逸構造",
+          "enemy_name": "散逸パターン",
+          "enemy_color": "#00CED1",
+          "enemy_sprite_shape": "wave",
+          "enemy_sprite_animation": "oscillate",
+          "stability_threshold": 32,
+          "enemy_intents": [
+            {
+              "text": "エネルギー散逸 (7エントロピー)",
+              "type": "entropy",
+              "value": 7
+            },
+            {
+              "text": "秩序流出 (4エントロピー×2)",
+              "type": "entropy",
+              "value": 4,
+              "multi": 2
+            },
+            {
+              "text": "準安定化",
+              "type": "stabilize",
+              "value": 0
+            },
+            {
+              "text": "非線形応答 (9エントロピー)",
+              "type": "entropy",
+              "value": 9
+            }
+          ],
+          "enemy_intent_mode": "random"
+        },
+        {
+          "name": "創発秩序",
+          "enemy_name": "創発ネットワーク",
+          "enemy_color": "#FFD700",
+          "enemy_sprite_shape": "fractal",
+          "enemy_sprite_animation": "pulse",
+          "stability_threshold": 40,
+          "enemy_intents": [
+            {
+              "text": "同期発火 (8エントロピー)",
+              "type": "entropy",
+              "value": 8
+            },
+            {
+              "text": "増幅連鎖 (6エントロピー×2)",
+              "type": "entropy",
+              "value": 6,
+              "multi": 2
+            },
+            {
+              "text": "全体再編成",
+              "type": "stabilize",
+              "value": 0
+            },
+            {
+              "text": "創発防御 (-3エントロピー蓄積)",
+              "type": "reduce_entropy",
+              "value": 3
+            }
+          ],
+          "enemy_intent_mode": "sequential"
+        }
+      ]
     }
   ],
   "player_defaults": {

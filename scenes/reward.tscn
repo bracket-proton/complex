@@ -59,7 +59,7 @@ custom_minimum_size = Vector2(200, 45)
 
 [node name="NextFloorButton" type="Button" parent="VBox"]
 layout_mode = 2
-text = "次の位相へ"
+text = "次の位相へ（レジーム内）"
 custom_minimum_size = Vector2(200, 45)
 
 [node name="UICanvas" type="CanvasLayer" parent="."]

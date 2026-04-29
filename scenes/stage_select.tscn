@@ -25,32 +25,37 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 16
 
 [node name="Title" type="Label" parent="VBox"]
 layout_mode = 2
-text = "位相選択"
+text = "レジーム選択"
 horizontal_alignment = 1
 custom_minimum_size = Vector2(0, 60)
 
-[node name="Spacer1" type="Control" parent="VBox"]
+[node name="RegimeListContainer" type="VBoxContainer" parent="VBox"]
 layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+custom_minimum_size = Vector2(0, 300)
+
+[node name="RegimeInfo" type="Label" parent="VBox"]
+layout_mode = 2
+text = ""
+horizontal_alignment = 1
 custom_minimum_size = Vector2(0, 80)
 
-[node name="StageName" type="Label" parent="VBox"]
+[node name="FloorInfo" type="Label" parent="VBox"]
 layout_mode = 2
-text = "位相 1 - 平衡状態"
+text = ""
 horizontal_alignment = 1
 custom_minimum_size = Vector2(0, 40)
-
-[node name="Spacer2" type="Control" parent="VBox"]
-layout_mode = 2
-size_flags_vertical = 2
 
 [node name="StartButton" type="Button" parent="VBox"]
 layout_mode = 2
 text = "摂動を開始する"
 custom_minimum_size = Vector2(200, 50)
+disabled = true
 
 [node name="BackButton" type="Button" parent="VBox"]
 layout_mode = 2

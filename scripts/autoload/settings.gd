@@ -4,7 +4,7 @@ extends Node
 
 const SAVE_PATH := "user://settings.cfg"
 
-var bgm_volume: float = 1.0
+var bgm_volume: float = 0.75
 var font_scale: float = 1.0
 
 func _ready() -> void:
@@ -16,7 +16,7 @@ func _load() -> void:
 	var cfg := ConfigFile.new()
 	var err := cfg.load(SAVE_PATH)
 	if err == OK:
-		bgm_volume = cfg.get_value("audio", "bgm_volume", 1.0)
+		bgm_volume = cfg.get_value("audio", "bgm_volume", 0.75)
 		font_scale = cfg.get_value("display", "font_scale", 1.0)
 
 func save() -> void:

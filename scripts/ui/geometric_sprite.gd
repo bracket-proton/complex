@@ -69,7 +69,11 @@ func _draw() -> void:
 		"wave":
 			_draw_wave(draw_center, draw_size, anim_time)
 		"fractal":
-			_draw_fractal_tree(draw_center, draw_size, rotation_mod)
+			# 深度を時間変動させて枝が呼吸するように伸縮
+			var depth_float := 3.0 + 1.5 * (0.5 + 0.5 * sin(anim_time * 1.5))
+			# ツリーの開始位置を下げてカード中央に収める
+			var tree_origin := draw_center + Vector2(0, draw_size * 0.4)
+			_draw_fractal_tree(tree_origin, draw_size * 0.7, rotation_mod, int(depth_float))
 		"attractor":
 			_draw_attractor(draw_center, draw_size, anim_time)
 		_:
@@ -137,21 +141,24 @@ func _draw_wave(center: Vector2, amplitude: float, time: float) -> void:
 		var x := center.x - half_width + (i + 0.5) * half_width * 2 / 3.0
 		draw_circle(Vector2(x, center.y), 2, base_color * Color(1, 1, 1, 0.5))
 
-func _draw_fractal_tree(center: Vector2, length: float, rot: float) -> void:
-	_fractal_branch(center, Vector2.UP * length, length, 4, rot)
+func _draw_fractal_tree(center: Vector2, length: float, rot: float, depth: int = 4) -> void:
+	# rot をツリー全体の回転として適用（根元の方向ベクトルを回転）
+	var base_dir := Vector2.UP.rotated(rot) * length
+	_fractal_branch(center, base_dir, length, depth)
 
-func _fractal_branch(start: Vector2, direction: Vector2, length: float, depth: int, angle_offset: float) -> void:
+func _fractal_branch(start: Vector2, direction: Vector2, length: float, depth: int) -> void:
 	if depth <= 0 or length < 2:
 		return
 	var end := start + direction
-	var col := base_color * Color(1, 1,1, 0.3 + 0.7 * (depth / 4.0))
+	var col := base_color * Color(1, 1, 1, 0.3 + 0.7 * (depth / 4.0))
 	draw_line(start, end, col, maxf(1.0, depth * 0.5))
 	
+	const BRANCH_ANGLE := PI / 5.0  # 36°分岐
 	var branch_length := length * 0.7
-	var left_dir := direction.rotated(-angle_offset) * 0.7
-	var right_dir := direction.rotated(angle_offset) * 0.7
-	_fractal_branch(end, left_dir, branch_length, depth - 1, angle_offset)
-	_fractal_branch(end, right_dir, branch_length, depth - 1, angle_offset)
+	var left_dir := direction.rotated(-BRANCH_ANGLE) * 0.7
+	var right_dir := direction.rotated(BRANCH_ANGLE) * 0.7
+	_fractal_branch(end, left_dir, branch_length, depth - 1)
+	_fractal_branch(end, right_dir, branch_length, depth - 1)
 
 func _draw_attractor(center: Vector2, attractor_scale: float, time: float) -> void:
 	var r := attractor_scale
